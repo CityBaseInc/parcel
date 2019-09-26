@@ -206,14 +206,14 @@ export default class Server extends EventEmitter {
 
     setHeaders(res);
     res.setHeader('Content-Length', '' + stat.size);
-    if (req.method === 'HEAD') {
-      res.end();
-      return;
-    }
-
     let contentType = mime.contentType(path.extname(filePath));
     if (contentType) {
       res.setHeader('Content-Type', contentType);
+    }
+
+    if (req.method === 'HEAD') {
+      res.end();
+      return;
     }
 
     return new Promise((resolve, reject) => {

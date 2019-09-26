@@ -2,7 +2,9 @@
 import type {
   Environment as IEnvironment,
   EnvironmentContext,
-  Engines
+  Engines,
+  OutputFormat,
+  PackageName
 } from '@parcel/types';
 import type {Environment as InternalEnvironment} from '../types';
 import nullthrows from 'nullthrows';
@@ -43,8 +45,16 @@ export default class Environment implements IEnvironment {
     return this.#environment.engines;
   }
 
-  get includeNodeModules(): boolean {
+  get includeNodeModules(): boolean | Array<PackageName> {
     return this.#environment.includeNodeModules;
+  }
+
+  get outputFormat(): OutputFormat {
+    return this.#environment.outputFormat;
+  }
+
+  get isLibrary(): boolean {
+    return this.#environment.isLibrary;
   }
 
   isBrowser() {
